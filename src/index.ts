@@ -1,10 +1,28 @@
 import cors from "cors"
-import express  from "express";
-// Configuração do CORS
-export const app = express();
+import express, { Application }  from "express"
 
-app.use(cors());
+//importação de rotas
 
+import RoutesTable from "./Http/Router/RoutesTables"
+
+
+class App{
+
+  public app:Application // esse aplication e o tipo que o express fornece a applicalçao
+  constructor(){
+    this.app = express()
+    this.middlewares();
+    this.routes()
+  }
+
+  middlewares(){
+    this.app.use(cors());
+  }
+
+  routes(){
+    this.app.use("/tables", RoutesTable)
+  }
+}
 // Outras configurações e rotas do seu servidor
 app.get('/', (req:any, res:any) => {
   res.json({ message: 'API funcionando corretamente!' });
