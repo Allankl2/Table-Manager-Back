@@ -1,4 +1,13 @@
-export default async (req:object, res:object, next:object) => {
+
+export default async (req:any, res:any, next:object) => {
+
+    
     const { authorization } = req.headers;
+    if(!authorization) {
+        return res.status(401).json({
+            errors: ['Login required'],
+        })
+    }
+
 
 }
